@@ -1,4 +1,4 @@
-const save = require('./save');
+const save = require('./save').save;
 
 function confirm(input) {
   const reserveArr = input.trim().split(" ");

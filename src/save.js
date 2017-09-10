@@ -9,7 +9,7 @@ const save = {
 
     else {
       const sameDateItem = reserveArr.filter(function (item) {
-        return item.reserveDate == reserveItem.reserveDate;
+        return item.reserveDate == reserveItem.reserveDate && item.reservePlace === reserveItem.reservePlace;
       });
 
       if (sameDateItem.length == 0) {
@@ -37,15 +37,18 @@ const save = {
     }
   },
   saveCancelReserve: function (reserveItem) {
-    const isExist = JSON.stringify(reserveArr).indexOf(JSON.stringify(reserveItem))!=-1;
-
-    if (isExist){
-      cancelReserve.push(reserveArr.shift());
-      return true;
+    for (let i = 0; i < reserveArr.length; i++) {
+      if (JSON.stringify(reserveArr[i]) === JSON.stringify(reserveItem)) {
+        reserveArr.slice(i, 1);
+        cancelReserve.push(reserveItem);
+        return true;
+      }
     }
-    else {
-      return false;
-    }
+    return false;
   }
 };
-module.exports = save;
+module.exports = {
+  save: save,
+  reserveArr: reserveArr,
+  cancelReserve: cancelReserve
+};
