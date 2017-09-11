@@ -29,21 +29,24 @@ const save = {
           return false;
         }
       }
-    }  //测试
+    }
   },
   saveCancelReserve: function (reserveItem) {
     for (let i = 0; i < reserveArr.length; i++) {
       if (_.isEqual(reserveArr[i], reserveItem)) {
+        console.log("aa");
         reserveArr.splice(i, 1);
         cancelReserve.push(reserveItem);
         return true;
       }
     }
     return false;
-  }   //测试
+  }
 };
 module.exports = {
   save: save,
   reserveArr: reserveArr,
-  cancelReserve: cancelReserve
+  cancelReserve: cancelReserve,
+  saveCancelReserve:save.saveCancelReserve,
+  saveReserve:save.saveReserve
 };

@@ -1,9 +1,6 @@
 'use strict';
 
 const confirm = require('../src/confirm');
-const calculate = require('../src/calculate');
-const save = require('../src/save');
-const printSum = require('../src/print-sum');
 
 describe('input-test', ()=> {
   it('#1| should return false when input is a string without space', () => {
@@ -58,7 +55,7 @@ describe('input-test', ()=> {
     const input = 'U002 2017-08-01 10:00~22:00 A C';
     let result = confirm(input);
     expect(result).toEqual(true);
-  })
+  });
 });
 
 
