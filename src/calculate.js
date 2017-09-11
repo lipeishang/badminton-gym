@@ -1,21 +1,12 @@
-const {dailyStandard, weekend} = require('./chargingStandard');
+const standard = require('./chargingStandard');
 const reserveArr = require('./save').reserveArr;
 const cancelReserve = require('./save').cancelReserve;
-// 预订：[{ reserveUID: 'U005',
-//     reserveDate: '2017-08-05',
-//     reserveTime: '09:00~18:00',
-//     reservePlace: 'A' } ]
+const printSum = require('./print-sum');
 
-// 取消：[ { reserveUID: 'U005',
-//   reserveDate: '2017-08-05',
-//   reserveTime: '09:00~19:00',
-//   reservePlace: 'D' } ]
-
-// dailyStandard: {"9:00~12:00": 30, "12:00~18:00": 50, "18:00~20:00": 80, "20:00~22:00": 60},
-// weekend: {"9:00~12:00": 40, "12:00~18:00": 50, "18:00~22:00": 60}
 function calculate() {
   var placeA = [], placeB = [], placeC = [], placeD = [];
   var cancelA = [], cancelB = [], cancelC = [], cancelD = [];
+  const flag = 1;
   reserveArr.forEach(function (item) {
     switch (item.reservePlace) {
       case "A":
@@ -31,7 +22,6 @@ function calculate() {
         placeD.push(item);
     }
   });
-
   cancelReserve.forEach(function (item) {
     switch (item.reservePlace) {
       case "A":
@@ -47,6 +37,59 @@ function calculate() {
         cancelD.push(item);
     }
   });
+  console.log(`收入汇总
+---`);
+  [placeA, placeB, placeC, placeD].forEach(function (placeItem) {
+    if (placeItem.length == 0) {
+      placeItem.reserveItem = 0;
+    } else {
+      sumItem(placeItem);
+    }
+  });
+  [cancelA, cancelB, cancelC, cancelD].forEach(function (cancelItem) {
+    if (cancelItem.length == 0) {
+      cancelItem.cancelItem = 0;
+    } else {
+      sumItem(cancelItem, flag);
+    }
+  });
+  printSum(placeA, placeB, placeC, placeD, cancelA, cancelB, cancelC, cancelD);
+}
+
+function sumItem(arr, flag) {
+  for (let i = 0; i < arr.length; i++) {
+    const reserveStart = parseInt(arr[i].reserveTime.slice(0, 2));
+    const reserveEnd = parseInt(arr[i].reserveTime.slice(6, 8));
+    var week = new Date(arr[i].reserveDate).getDay();
+    switch (week) {
+      case 0:
+      case 6:
+        flag === undefined ? arr[i].reserveItem = getSumItem(standard.weekendStandard, reserveStart, reserveEnd) :
+          arr[i].cancelItem = getSumItem(standard.weekendStandard, reserveStart, reserveEnd) * 0.25;
+        break;
+      case 1:
+      case 2:
+      case 3:
+      case 4:
+      case 5:
+        flag === undefined ? arr[i].reserveItem = getSumItem(standard.weekendStandard, reserveStart, reserveEnd) :
+          arr[i].cancelItem = getSumItem(standard.weekendStandard, reserveStart, reserveEnd) * 0.5;
+        break;
+    }
+  }
+}
+
+function getSumItem(standard, reserveStart, reserveEnd) {
+  for (let i = 0; i < standard.length; i++) {
+    let start = standard[i].startTime;
+    let end = standard[i].endTime;
+    if (reserveStart >= start && reserveStart < end && reserveEnd <= end) {
+      return (reserveEnd - reserveStart) * standard[i].money;
+    }
+    if (reserveStart >= start && reserveStart < end && reserveEnd > end) {
+      return (end - reserveStart) * standard[i].money + getSumItem(standard, end, reserveEnd);
+    }
+  }
 }
 
 module.exports = calculate;

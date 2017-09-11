@@ -1,4 +1,14 @@
-module.exports = {
-  dailyStandard: {"9:00~12:00": 30, "12:00~18:00": 50, "18:00~20:00": 80, "20:00~22:00": 60},
-  weekend: {"9:00~12:00": 40, "12:00~18:00": 50, "18:00~22:00": 60}
+var standards = {
+  dailyStandard: [
+    {startTime: 9, endTime: 12, money: 30},
+    {startTime: 12, endTime: 18, money: 50},
+    {startTime: 18, endTime: 20, money: 80},
+    {startTime: 20, endTime: 22, money: 60}],
+  weekendStandard: [
+    {startTime: 9, endTime: 12, money: 40},
+    {startTime: 12, endTime: 18, money: 50},
+    {startTime: 18, endTime: 22, money: 60}]
 };
+
+
+module.exports = standards;
