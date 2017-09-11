@@ -1,5 +1,6 @@
 var reserveArr = [];
 var cancelReserve = [];
+const _ = require('lodash');
 
 const save = {
   saveReserve: function (reserveItem) {
@@ -10,8 +11,8 @@ const save = {
       const sameDateItem = reserveArr.filter(function (item) {
         return item.reserveDate == reserveItem.reserveDate && item.reservePlace === reserveItem.reservePlace;
       });
+
       if (sameDateItem.length == 0) {
-        console.log(reserveArr);
         reserveArr.push(reserveItem);
         return true;
       } else {
@@ -20,10 +21,10 @@ const save = {
           const itemEnd = parseInt((item.reserveTime.split("~")[1]).split(":")[0]);
           const reserveStart = parseInt((reserveItem.reserveTime.split("~")[0]).split(":")[0]);
           const reserveEnd = parseInt((reserveItem.reserveTime.split("~")[0]).split(":")[0]);
-          return itemEnd < reserveStart || reserveEnd < itemStart;
+          return itemEnd < reserveStart && reserveEnd < itemStart;
         });
+
         if (isSave) {
-          console.log(reserveArr);
           reserveArr.push(reserveItem);
           return true;
         } else {
@@ -34,8 +35,8 @@ const save = {
   },
   saveCancelReserve: function (reserveItem) {
     for (let i = 0; i < reserveArr.length; i++) {
-      if (JSON.stringify(reserveArr[i]) === JSON.stringify(reserveItem)) {
-        reserveArr.slice(i, 1);
+      if (_.isEqual(reserveArr[i], reserveItem)) {
+        reserveArr.splice(i, 1);
         cancelReserve.push(reserveItem);
         return true;
       }

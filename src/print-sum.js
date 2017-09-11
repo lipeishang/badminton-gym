@@ -33,7 +33,7 @@ function placeTotal(place) {
   var subTotal = reserveSum + cancelSum;
 
   place.sum = subTotal;
-  console.log(`小计：${subTotal}元
+  console.log(`小计:${subTotal}元
 `);
 }
 
@@ -43,7 +43,7 @@ function finalTotal() {
   for (let arg of arguments) {
     finalTotal += arg.sum;
   }
-  console.log(`总计：${finalTotal}元`);
+  console.log(`总计:${finalTotal}元`);
 }
 
 module.exports = printSum;

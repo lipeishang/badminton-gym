@@ -72,8 +72,8 @@ function sumItem(arr, flag) {
       case 3:
       case 4:
       case 5:
-        flag === undefined ? arr[i].reserveItem = getSumItem(standard.weekendStandard, reserveStart, reserveEnd) :
-          arr[i].cancelItem = getSumItem(standard.weekendStandard, reserveStart, reserveEnd) * 0.5;
+        flag === undefined ? arr[i].reserveItem = getSumItem(standard.dailyStandard, reserveStart, reserveEnd) :
+          arr[i].cancelItem = getSumItem(standard.dailyStandard, reserveStart, reserveEnd) * 0.5;
         break;
     }
   }
