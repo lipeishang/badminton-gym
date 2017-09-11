@@ -49,7 +49,8 @@ function placeTotal(total, place) {
 
   place.sum = subTotal;
   console.log(`小计:${subTotal}元
-`)
+`);
+  return place;
 }
 
 function finalTotal() {

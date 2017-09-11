@@ -93,7 +93,7 @@ function getSumItem(standard, reserveStart, reserveEnd) {
 }
 
 module.exports = {
-  calculate:calculate,
-  sumItem:sumItem,
-  getSumItem:getSumItem
+  calculate: calculate,
+  sumItem: sumItem,
+  getSumItem: getSumItem
 };
