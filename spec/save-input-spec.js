@@ -26,7 +26,7 @@ describe('save-input', ()=> {
 
     const reserveItem = {
       reserveUID: "U123",
-      reserveDate: "2017-08-10",
+      reserveDate: "2017-08-13",
       reserveTime: "19:00~22:00",
       reservePlace: "A"
     };
@@ -38,7 +38,7 @@ describe('save-input', ()=> {
   it('#3| should return true when reserveTime has no cross', () => {
     const reserve = [{
       reserveUID: "U123",
-      reserveDate: "2017-08-10",
+      reserveDate: "2017-08-14",
       reserveTime: "19:00~22:00",
       reservePlace: "A"
     }, {
@@ -55,14 +55,14 @@ describe('save-input', ()=> {
   it('#4| should return false when reserveTime has cross ', () => {
     const willReserve = {
       reserveUID: "U123",
-      reserveDate: "2017-08-10",
+      reserveDate: "2017-08-15",
       reserveTime: "19:00~22:00",
       reservePlace: "A"
     };
 
     const hasReserve = {
       reserveUID: "U123",
-      reserveDate: "2017-08-10",
+      reserveDate: "2017-08-15",
       reserveTime: "19:00~20:00",
       reservePlace: "A"
     };
@@ -75,7 +75,7 @@ describe('save-input', ()=> {
   it('#5| should return false when cancelItem is not exit', ()=> {
     const willCancelItem = {
       reserveUID: "U123",
-      reserveDate: "2017-08-10",
+      reserveDate: "2017-08-16",
       reserveTime: "19:00~20:00",
       reservePlace: "A"
     };
@@ -87,14 +87,19 @@ describe('save-input', ()=> {
 
     const willCancelItem = {
       reserveUID: "U123",
-      reserveDate: "2017-08-10",
+      reserveDate: "2017-08-17",
       reserveTime: "19:00~20:00",
       reservePlace: "A"
     };
 
     save.saveReserve(willCancelItem);
 
-    let result = save.saveCancelReserve([willCancelItem]);
+    let result = save.saveCancelReserve({
+      reserveUID: "U123",
+      reserveDate: "2017-08-17",
+      reserveTime: "19:00~20:00",
+      reservePlace: "A"
+    });
     expect(result).toEqual(true);
   })
 });
