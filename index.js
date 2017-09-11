@@ -11,7 +11,7 @@ rl.on('line', (input)=> {
     confirm(input);
   }
   else {
-    calculate();
+    calculate.calculate();
     rl.close();
   }
 });

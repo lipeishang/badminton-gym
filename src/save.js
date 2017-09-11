@@ -11,19 +11,17 @@ const save = {
       const sameDateItem = reserveArr.filter(function (item) {
         return item.reserveDate == reserveItem.reserveDate && item.reservePlace === reserveItem.reservePlace;
       });
-
       if (sameDateItem.length == 0) {
         reserveArr.push(reserveItem);
         return true;
       } else {
         const isSave = sameDateItem.every(function (item) {
-          const itemStart = parseInt((item.reserveTime.split("~")[0]).split(":")[0]);
-          const itemEnd = parseInt((item.reserveTime.split("~")[1]).split(":")[0]);
-          const reserveStart = parseInt((reserveItem.reserveTime.split("~")[0]).split(":")[0]);
-          const reserveEnd = parseInt((reserveItem.reserveTime.split("~")[0]).split(":")[0]);
-          return itemEnd < reserveStart && reserveEnd < itemStart;
+          const itemStart = parseInt((item.reserveTime.split("~")[0]).split(":")[0]);  //19
+          const itemEnd = parseInt((item.reserveTime.split("~")[1]).split(":")[0]);//22
+          const reserveStart = parseInt((reserveItem.reserveTime.split("~")[0]).split(":")[0]);//18
+          const reserveEnd = parseInt((reserveItem.reserveTime.split("~")[1]).split(":")[0]);//20
+          return  itemEnd <= reserveStart || reserveEnd <= itemStart;
         });
-
         if (isSave) {
           reserveArr.push(reserveItem);
           return true;
@@ -31,7 +29,7 @@ const save = {
           return false;
         }
       }
-    }
+    }  //测试
   },
   saveCancelReserve: function (reserveItem) {
     for (let i = 0; i < reserveArr.length; i++) {
@@ -42,7 +40,7 @@ const save = {
       }
     }
     return false;
-  }
+  }   //测试
 };
 module.exports = {
   save: save,

@@ -4,6 +4,7 @@ function confirm(input) {
   const reserveArr = input.trim().split(" ");
   if (reserveArr.length < 4 || reserveArr.length > 5) {
     console.log("Error:the booking is invalid!");
+    return false;
   }
   else {
     const reserveUID = /^U\d{3}/g;
@@ -21,22 +22,28 @@ function confirm(input) {
 
     if (!reserveUID.test(reserveArr[0]) || !reserveDate.test(reserveArr[1]) || !reserveTime.test(reserveArr[2]) || startTime >= endTime || !reservePlace.test(reserveArr[3])) {
       console.log("Error:the booking is invalid!");
+      return false;
     }
     else if (reserveArr.length == 4) {
       if (save.saveReserve(reserveItem)) {
         console.log("Success: the booking is accepted!");
+        return true;
       } else {
         console.log("Error:the booking is invalid!");
+        return false;
       }
     } else {
       if (reserveArr.length == 5 && reserveArr[4] === "C") {
         if (save.saveCancelReserve(reserveItem)) {
           console.log("Success: the booking is accepted!");
+          return true;
         } else {
           console.log("Error:the booking is invalid!");
+          return false;
         }
       } else {
         console.log("Error:the booking is invalid!");
+        return false;
       }
     }
   }

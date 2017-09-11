@@ -7,8 +7,7 @@
     "test": "node run-test.js && exit 1"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/freewind/take-out-food.git"
+    "type": "git"
   },
   "keywords": [],
   "author": "",

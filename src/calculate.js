@@ -53,7 +53,7 @@ function calculate() {
       sumItem(cancelItem, flag);
     }
   });
-  printSum(placeA, placeB, placeC, placeD, cancelA, cancelB, cancelC, cancelD);
+  printSum.printSum(placeA, placeB, placeC, placeD, cancelA, cancelB, cancelC, cancelD);
 }
 
 function sumItem(arr, flag) {
@@ -92,4 +92,8 @@ function getSumItem(standard, reserveStart, reserveEnd) {
   }
 }
 
-module.exports = calculate;
+module.exports = {
+  calculate:calculate,
+  sumItem:sumItem,
+  getSumItem:getSumItem
+};
