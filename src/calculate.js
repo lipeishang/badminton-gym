@@ -37,8 +37,6 @@ function calculate() {
         cancelD.push(item);
     }
   });
-  console.log(`收入汇总
----`);
   [placeA, placeB, placeC, placeD].forEach(function (placeItem) {
     if (placeItem.length == 0) {
       placeItem.reserveItem = 0;

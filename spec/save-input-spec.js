@@ -11,7 +11,7 @@ describe('save-input', ()=> {
     };
 
     let result = save.saveReserve(reserveItem);
-    expect(result).toEqual(true);
+    expect(result).toBe(true);
   });
 
   it('#2| should return true when sameDateItem.length is 0', () => {
@@ -32,7 +32,7 @@ describe('save-input', ()=> {
     };
 
     let result = save.saveReserve(reserveItem);
-    expect(result).toEqual(true);
+    expect(result).toBe(true);
   });
 
   it('#3| should return true when reserveTime has no cross', () => {
@@ -49,7 +49,7 @@ describe('save-input', ()=> {
     }];
 
     let result = save.saveReserve(reserve);
-    expect(result).toEqual(true);
+    expect(result).toBe(true);
   });
 
   it('#4| should return false when reserveTime has cross ', () => {
@@ -69,7 +69,7 @@ describe('save-input', ()=> {
 
     let saveBefore = save.saveReserve(hasReserve);
     let result = save.saveReserve(willReserve);
-    expect(result).toEqual(false);
+    expect(result).toBe(false);
   });
 
   it('#5| should return false when cancelItem is not exit', ()=> {
@@ -80,7 +80,7 @@ describe('save-input', ()=> {
       reservePlace: "A"
     };
     let result = save.saveCancelReserve(willCancelItem);
-    expect(result).toEqual(false);
+    expect(result).toBe(false);
   });
 
   it('#6| should return true when cancelItem is currect', ()=> {
@@ -100,6 +100,6 @@ describe('save-input', ()=> {
       reserveTime: "19:00~20:00",
       reservePlace: "A"
     });
-    expect(result).toEqual(true);
+    expect(result).toBe(true);
   })
 });
